@@ -1,15 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { ControlService } from 'src/app/shared/services/control.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-basic-control',
   templateUrl: './basic-control.page.html',
   styleUrls: ['./basic-control.page.scss'],
 })
-export class BasicControlPage implements OnInit {
+export class BasicControlPage {
 
-  constructor() { }
+  constructor(private controlService: ControlService) { }
 
-  ngOnInit() {
+  moveForward() {
+    this.controlService.moveForward();
   }
 
+  moveBackward() {
+    this.controlService.moveBackward();
+  }
+
+  turnLeft() {
+    this.controlService.turnLeft();
+  }
+
+  turnRight() {
+    this.controlService.turnRight();
+  }
+
+  stop() {
+    this.controlService.stop();
+  }
 }
