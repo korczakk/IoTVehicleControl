@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ControlService {
-  private urlAddress = 'http://localhost:5000';
+  private urlAddress = 'http://192.168.1.90:5000';
 
   constructor(private http: HttpClient) { }
 

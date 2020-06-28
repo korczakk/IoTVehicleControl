@@ -13,6 +13,7 @@ export class BasicControlPage {
 
   moveForward() {
     this.controlService.moveForward();
+    console.log('click');
   }
 
   moveBackward() {
