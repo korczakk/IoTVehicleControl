@@ -1,34 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { ControlService } from 'src/app/shared/services/control.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ControlHubService } from 'src/app/shared/hub/control-hub.service';
+import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
 
 @Component({
   selector: 'app-basic-control',
   templateUrl: './basic-control.page.html',
   styleUrls: ['./basic-control.page.scss'],
 })
-export class BasicControlPage {
+export class BasicControlPage implements OnInit, OnDestroy {
 
-  constructor(private controlService: ControlService) { }
+  constructor(private hubService: ControlHubService) { }
+
+  ngOnDestroy(): void {
+    this.hubService.stopConnection();
+  }
+  
+  ngOnInit(): void {
+    this.hubService.startConnection();
+  }
 
   moveForward() {
-    this.controlService.moveForward();
-    console.log('click');
+    this.hubService.sendCommand(VehicleControlCommands.GoForward);
   }
 
   moveBackward() {
-    this.controlService.moveBackward();
+    this.hubService.sendCommand(VehicleControlCommands.GoBackward);
   }
 
   turnLeft() {
-    this.controlService.turnLeft();
+    this.hubService.sendCommand(VehicleControlCommands.TurnLeft);
   }
 
   turnRight() {
-    this.controlService.turnRight();
+    this.hubService.sendCommand(VehicleControlCommands.TurnRight);
   }
 
   stop() {
-    this.controlService.stop();
+    this.hubService.sendCommand(VehicleControlCommands.Stop);
   }
 }
