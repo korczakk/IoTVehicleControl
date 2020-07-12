@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  vehicleControlHubUrl: 'http://localhost:5000/signalr/vehiclecontrol',
+  vehicleControlUrl: 'http://localhost:5000'
 };
 
 /*
