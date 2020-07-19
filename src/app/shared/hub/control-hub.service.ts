@@ -29,11 +29,12 @@ export class ControlHubService {
     await this.hubConnection.stop();
   }
 
-  public sendCommand(command: VehicleControlCommands) {
-    this.hubConnection.send(command).then(
-      success => console.log(success),
-      error => console.log(error)
-    );
+  public async sendCommand(command: VehicleControlCommands) {
+    try {
+      await this.hubConnection.invoke(command)  
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public async start() {
