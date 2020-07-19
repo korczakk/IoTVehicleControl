@@ -10,7 +10,7 @@ import { VehicleConnectionState } from 'src/app/models/vehicleConnectionState';
 })
 export class ControlHubService {
 
-  public vehicleConnectionState = new BehaviorSubject<VehicleConnectionState>(VehicleConnectionState.DisConnected);
+  public vehicleConnectionState = new BehaviorSubject<VehicleConnectionState>(VehicleConnectionState.Connecting);
 
   private hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder()
     .withUrl(environment.vehicleControlHubUrl)

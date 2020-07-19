@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BasicControlPageRoutingModule } from './basic-control-routing.module';
 
 import { BasicControlPage } from './basic-control.page';
+import { VehicleConnectionStatusComponent } from 'src/app/shared/components/vehicle-connection-status/vehicle-connection-status.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { BasicControlPage } from './basic-control.page';
     IonicModule,
     BasicControlPageRoutingModule
   ],
-  declarations: [BasicControlPage]
+  declarations: [
+    BasicControlPage,
+    VehicleConnectionStatusComponent
+  ]
 })
 export class BasicControlPageModule {}

@@ -1,0 +1,22 @@
+<ion-button
+  expand="full"
+  color="success"
+  *ngIf="connectionState === VehicleConnectionState.DisConnected"
+  (click)="connectClick()"
+>
+  Connect
+</ion-button>
+<div class="expanded ion-text-center">
+  <ion-label
+  color="danger"
+  *ngIf="connectionState === VehicleConnectionState.Reconnecting"
+>
+  Reconnecting...
+</ion-label>
+<ion-label
+  color="warning"
+  *ngIf="connectionState === VehicleConnectionState.Connecting"
+>
+  Connecting...
+</ion-label>
+</div>

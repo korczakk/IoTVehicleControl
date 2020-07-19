@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ControlHubService } from 'src/app/shared/hub/control-hub.service';
 import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
+import { VehicleConnectionState } from 'src/app/models/vehicleConnectionState';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-basic-control',
@@ -9,6 +11,8 @@ import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
 })
 export class BasicControlPage implements OnInit, OnDestroy {
 
+  vehicleConnectionState: Observable<VehicleConnectionState>;
+
   constructor(private hubService: ControlHubService) { }
 
   ngOnDestroy(): void {
@@ -16,7 +20,8 @@ export class BasicControlPage implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
-    this.hubService.startConnection();
+    this.hubService.InitiateConnection();
+    this.vehicleConnectionState = this.hubService.vehicleConnectionState;
   }
 
   moveForward() {
@@ -37,5 +42,9 @@ export class BasicControlPage implements OnInit, OnDestroy {
 
   stop() {
     this.hubService.sendCommand(VehicleControlCommands.Stop);
+  }
+
+  connectToVehicle() {
+    this.hubService.start();
   }
 }
