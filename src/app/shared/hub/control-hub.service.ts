@@ -1,34 +1,47 @@
 import { Injectable } from '@angular/core';
-import * as signalR from '@aspnet/signalr'
+import * as signalR from '@microsoft/signalr'
 import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
 import { environment } from 'src/environments/environment'
+import { BehaviorSubject } from 'rxjs';
+import { VehicleConnectionState } from 'src/app/models/vehicleConnectionState';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ControlHubService {
 
-  private hubConnection: signalR.HubConnection;
-  
-  startConnection() {
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(environment.vehicleControlHubUrl)
-      .build();
-      console.log(environment.vehicleControlHubUrl);
-    this.hubConnection.start().then(
-      success => console.log(success),
-      error => console.log(error)
-    );
+  public vehicleConnectionState = new BehaviorSubject<VehicleConnectionState>(VehicleConnectionState.DisConnected);
+
+  private hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder()
+    .withUrl(environment.vehicleControlHubUrl)
+    .withAutomaticReconnect()
+    .build();
+
+  public async InitiateConnection() {
+    await this.start();
+
+    this.hubConnection.onclose(() => this.vehicleConnectionState.next(VehicleConnectionState.DisConnected));
+    this.hubConnection.onreconnecting(() => this.vehicleConnectionState.next(VehicleConnectionState.Reconnecting));
+    this.hubConnection.onreconnected(() => this.vehicleConnectionState.next(VehicleConnectionState.Reconnected));
   }
 
-  stopConnection() {
-    this.hubConnection.stop();
+  public async stopConnection() {
+    await this.hubConnection.stop();
   }
 
-  sendCommand(command: VehicleControlCommands) {
+  public sendCommand(command: VehicleControlCommands) {
     this.hubConnection.send(command).then(
       success => console.log(success),
       error => console.log(error)
     );
+  }
+
+  public async start() {
+    try {
+      await this.hubConnection.start();
+      this.vehicleConnectionState.next(VehicleConnectionState.Connected);
+    } catch (err) {
+      setTimeout(() => this.start(), 5000)
+    }
   }
 }
