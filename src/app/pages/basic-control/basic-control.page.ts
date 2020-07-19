@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class BasicControlPage implements OnInit, OnDestroy {
 
   vehicleConnectionState: Observable<VehicleConnectionState>;
+  ConnectionState = VehicleConnectionState;
 
   constructor(private hubService: ControlHubService) { }
 
