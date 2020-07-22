@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   vehicleControlHubUrl: 'http://localhost:5000/signalr/vehiclecontrol',
-  vehicleControlUrl: 'http://localhost:5000'
+  vehicleControlUrl: 'http://localhost:5000',
+  distanceMeasurementHubUrl: 'http://localhost:5000/signalr/distance',
 };
 
 /*

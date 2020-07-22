@@ -3,6 +3,7 @@ import { ControlHubService } from 'src/app/shared/hub/control-hub.service';
 import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
 import { VehicleConnectionState } from 'src/app/models/vehicleConnectionState';
 import { Observable } from 'rxjs';
+import { DistanceMeasurementHubService } from 'src/app/shared/hub/distance-measurement-hub.service';
 
 @Component({
   selector: 'app-basic-control',
@@ -13,39 +14,46 @@ export class BasicControlPage implements OnInit, OnDestroy {
 
   vehicleConnectionState: Observable<VehicleConnectionState>;
   ConnectionState = VehicleConnectionState;
+  distanceMeasurement: Observable<number>;
 
-  constructor(private hubService: ControlHubService) { }
+  constructor(
+    private vehicleControlHubService: ControlHubService,
+    private distanceHubService: DistanceMeasurementHubService) { }
 
   ngOnDestroy(): void {
-    this.hubService.stopConnection();
+    this.vehicleControlHubService.stopConnection();
+    this.distanceHubService.closeConnection();
   }
   
   ngOnInit(): void {
-    this.hubService.InitiateConnection();
-    this.vehicleConnectionState = this.hubService.vehicleConnectionState;
+    this.vehicleControlHubService.InitiateConnection();
+    this.vehicleConnectionState = this.vehicleControlHubService.vehicleConnectionState;
+
+    this.distanceHubService.InitiateConnection();
+    this.distanceMeasurement = this.distanceHubService.distanceMeasurement;
   }
 
   moveForward() {
-    this.hubService.sendCommand(VehicleControlCommands.GoForward);
+    this.vehicleControlHubService.sendCommand(VehicleControlCommands.GoForward);
   }
 
   moveBackward() {
-    this.hubService.sendCommand(VehicleControlCommands.GoBackward);
+    this.vehicleControlHubService.sendCommand(VehicleControlCommands.GoBackward);
   }
 
   turnLeft() {
-    this.hubService.sendCommand(VehicleControlCommands.TurnLeft);
+    this.vehicleControlHubService.sendCommand(VehicleControlCommands.TurnLeft);
   }
 
   turnRight() {
-    this.hubService.sendCommand(VehicleControlCommands.TurnRight);
+    this.vehicleControlHubService.sendCommand(VehicleControlCommands.TurnRight);
   }
 
   stop() {
-    this.hubService.sendCommand(VehicleControlCommands.Stop);
+    this.vehicleControlHubService.sendCommand(VehicleControlCommands.Stop);
   }
 
   connectToVehicle() {
-    this.hubService.start();
+    this.vehicleControlHubService.start();
   }
 }

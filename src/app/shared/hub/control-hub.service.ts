@@ -22,7 +22,7 @@ export class ControlHubService {
 
     this.hubConnection.onclose(() => this.vehicleConnectionState.next(VehicleConnectionState.DisConnected));
     this.hubConnection.onreconnecting(() => this.vehicleConnectionState.next(VehicleConnectionState.Reconnecting));
-    this.hubConnection.onreconnected(() => this.vehicleConnectionState.next(VehicleConnectionState.Reconnected));
+    this.hubConnection.onreconnected(() => this.vehicleConnectionState.next(VehicleConnectionState.Connected));
   }
 
   public async stopConnection() {
@@ -42,7 +42,7 @@ export class ControlHubService {
       await this.hubConnection.start();
       this.vehicleConnectionState.next(VehicleConnectionState.Connected);
     } catch (err) {
-      setTimeout(() => this.start(), 5000)
+      setTimeout(() => this.start(), 3000)
     }
   }
 }
