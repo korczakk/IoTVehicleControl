@@ -3,7 +3,6 @@ import { ControlHubService } from 'src/app/shared/hub/control-hub.service';
 import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
 import { VehicleConnectionState } from 'src/app/models/vehicleConnectionState';
 import { Observable } from 'rxjs';
-import { DistanceMeasurementHubService } from 'src/app/shared/hub/distance-measurement-hub.service';
 
 @Component({
   selector: 'app-basic-control',
@@ -17,20 +16,17 @@ export class BasicControlPage implements OnInit, OnDestroy {
   distanceMeasurement: Observable<number>;
 
   constructor(
-    private vehicleControlHubService: ControlHubService,
-    private distanceHubService: DistanceMeasurementHubService) { }
+    private vehicleControlHubService: ControlHubService) { }
 
   ngOnDestroy(): void {
     this.vehicleControlHubService.stopConnection();
-    this.distanceHubService.closeConnection();
   }
   
   ngOnInit(): void {
     this.vehicleControlHubService.InitiateConnection();
     this.vehicleConnectionState = this.vehicleControlHubService.vehicleConnectionState;
 
-    this.distanceHubService.InitiateConnection();
-    this.distanceMeasurement = this.distanceHubService.distanceMeasurement;
+    this.distanceMeasurement = this.vehicleControlHubService.distanceMeasurement;
   }
 
   moveForward() {
