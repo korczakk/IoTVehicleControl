@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Basic control</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-grid>
     <ion-row>
@@ -64,18 +58,29 @@
         </ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="4" offset="4">
-        <h3 class="ion-text-center">Distance</h3>
+    <ion-row >
+      <ion-col size="12" class="small-distance">
+        <h3 class="ion-text-center">
+          Distance: {{distanceMeasurement | async}}
+        </h3>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="4" offset="4">
-        <h2 class="ion-text-center">
-          {{distanceMeasurement | async}}
-        </h2>
+      <ion-col size="12" class="small-distance">
+        <ion-card>
+          <ion-card-header (click)="toggleCameraView()">
+            <ion-card-title>
+              Camera view
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img *ngIf="videoCardVisible"
+              width="320"
+              height="240"
+              [src]="videoFeedUrl"
+            />
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

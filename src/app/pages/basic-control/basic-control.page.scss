@@ -1,0 +1,23 @@
+@mixin horizontal-distance($paddingTop, $paddingBottom, $marginTop, $marginBottom) {
+    padding-top: $paddingTop;
+    padding-bottom: $paddingBottom;
+    margin-top: $marginTop;
+    margin-bottom: $marginBottom;
+}
+
+.small-distance {
+    @include horizontal-distance(1px, 1px, auto, auto )
+}
+
+ion-card {
+    @include horizontal-distance(auto, auto, 4px, 4px )
+}
+
+ion-card-header {
+    @include horizontal-distance(5px, 5px, auto, auto )
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
