@@ -5,19 +5,34 @@
     margin-bottom: $marginBottom;
 }
 
+@mixin vertical-distance($paddingLeft, $paddingRight, $marginLeft, $marginRight) {
+    padding-left: $paddingLeft;
+    padding-right: $paddingRight;
+    margin-left: $marginLeft;
+    margin-right: $marginRight;
+}
+
 .small-distance {
     @include horizontal-distance(1px, 1px, auto, auto )
 }
 
 ion-card {
-    @include horizontal-distance(auto, auto, 4px, 4px )
+    @include horizontal-distance('inherit', 'inherit', 4px, 4px )
 }
 
 ion-card-header {
     @include horizontal-distance(5px, 5px, auto, auto )
 }
 
-h3 {
-    margin-top: 0;
-    margin-bottom: 0;
+ion-card-content {
+    @include vertical-distance(1px, 1px, auto, auto )
+}
+
+ion-card {
+    @include vertical-distance('inherit', 'inherit', 3px, 3px )
+}
+
+.card-content {
+    display: flex;
+    justify-content : center;
 }
