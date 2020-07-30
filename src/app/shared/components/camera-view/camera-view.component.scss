@@ -29,7 +29,8 @@ ion-card-content {
 }
 
 ion-card {
-    @include vertical-distance('inherit', 'inherit', 2px, 2px )
+    @include vertical-distance('inherit', 'inherit', 2px, 2px );
+    @include horizontal-distance(0px, 0px, 0px, auto )
 }
 
 .card-content {
