@@ -45,7 +45,6 @@
         </ion-button>
       </ion-col>
     </ion-row>
-
     <ion-row>
       <ion-col size="2" offset="5">
         <ion-button
@@ -59,17 +58,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="12" class="small-distance">
-        <ion-card>
-          <ion-card-header (click)="toggleCameraView()">
-            <ion-card-title>
-              Camera view
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content class="card-content" *ngIf="videoCardVisible">
-            <img width="320" height="240" [src]="videoFeedUrl" />
-          </ion-card-content>
-        </ion-card>
+      <ion-col size="12">
+        <app-camera-view></app-camera-view>
       </ion-col>
     </ion-row>
     <ion-row>

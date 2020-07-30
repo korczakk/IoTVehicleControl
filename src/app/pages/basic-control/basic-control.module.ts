@@ -8,6 +8,7 @@ import { BasicControlPageRoutingModule } from './basic-control-routing.module';
 
 import { BasicControlPage } from './basic-control.page';
 import { VehicleConnectionStatusComponent } from 'src/app/shared/components/vehicle-connection-status/vehicle-connection-status.component';
+import { CameraViewComponent } from 'src/app/shared/components/camera-view/camera-view.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { VehicleConnectionStatusComponent } from 'src/app/shared/components/vehi
   ],
   declarations: [
     BasicControlPage,
-    VehicleConnectionStatusComponent
+    VehicleConnectionStatusComponent,
+    CameraViewComponent
   ]
 })
 export class BasicControlPageModule {}

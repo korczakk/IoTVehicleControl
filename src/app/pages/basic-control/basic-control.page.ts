@@ -14,10 +14,6 @@ export class BasicControlPage implements OnInit, OnDestroy {
   vehicleConnectionState: Observable<VehicleConnectionState>;
   ConnectionState = VehicleConnectionState;
   distanceMeasurement: Observable<number>;
-  videoCardVisible = false;
-
-  private videoFeedOriginalUrl = 'http://192.168.1.90:8080/stream/video.mjpeg';
-  public videoFeedUrl = '';
 
   constructor(
     private vehicleControlHubService: ControlHubService) { }
@@ -55,20 +51,5 @@ export class BasicControlPage implements OnInit, OnDestroy {
 
   connectToVehicle() {
     this.vehicleControlHubService.start();
-  }
-
-  toggleCameraView() {
-    if (this.videoCardVisible) {
-      this.videoFeedUrl = '';
-      setTimeout(() => {
-        this.videoCardVisible = false;
-      }, 10); 
-    } else {
-      this.videoFeedUrl = this.videoFeedOriginalUrl;
-      setTimeout(() => {
-        this.videoCardVisible = true;
-      }, 10); 
-    }
-
   }
 }
