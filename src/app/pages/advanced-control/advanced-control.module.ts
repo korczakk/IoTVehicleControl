@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
-
 import { AdvancedControlPageRoutingModule } from './advanced-control-routing.module';
 
 import { AdvancedControlPage } from './advanced-control.page';
-import { VehicleConnectionStatusComponent } from 'src/app/shared/components/vehicle-connection-status/vehicle-connection-status.component';
-import { CameraViewComponent } from 'src/app/shared/components/camera-view/camera-view.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    AdvancedControlPageRoutingModule
+    AdvancedControlPageRoutingModule,
+    SharedModule
   ],
-  declarations: [AdvancedControlPage, VehicleConnectionStatusComponent, CameraViewComponent]
+  declarations: [AdvancedControlPage,
+  ]
 })
 export class AdvancedControlPageModule { }
