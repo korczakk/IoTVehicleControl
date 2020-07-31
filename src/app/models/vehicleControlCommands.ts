@@ -3,5 +3,11 @@ export enum VehicleControlCommands {
     Stop = 'Stop',
     TurnLeft = 'TurnLeft',
     TurnRight = 'TurnRight',
-    GoBackward = 'GoBackward'
+    GoBackward = 'GoBackward',
+    GoLeftForward = 'GoLeftForward',
+    GoRightForward = 'GoRightForward',
+    StopLeft = 'StopLeft',
+    StopRight = 'StopRight',
+    GoLeftBackward = 'GoLeftBackward',
+    GoRightBackward = 'GoRightBackward'    
 }

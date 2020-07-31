@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ControlHubService } from 'src/app/shared/hub/control-hub.service';
 import { VehicleControlCommands } from 'src/app/models/vehicleControlCommands';
 import { VehicleConnectionState } from 'src/app/models/vehicleConnectionState';
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   templateUrl: './basic-control.page.html',
   styleUrls: ['./basic-control.page.scss'],
 })
-export class BasicControlPage implements OnInit, OnDestroy {
+export class BasicControlPage implements OnInit {
 
   vehicleConnectionState: Observable<VehicleConnectionState>;
   ConnectionState = VehicleConnectionState;
@@ -18,12 +18,7 @@ export class BasicControlPage implements OnInit, OnDestroy {
   constructor(
     private vehicleControlHubService: ControlHubService) { }
 
-  ngOnDestroy(): void {
-    this.vehicleControlHubService.stopConnection();
-  }
-
   ngOnInit(): void {
-    this.vehicleControlHubService.InitiateConnection();
     this.vehicleConnectionState = this.vehicleControlHubService.vehicleConnectionState;
 
     this.distanceMeasurement = this.vehicleControlHubService.distanceMeasurement;

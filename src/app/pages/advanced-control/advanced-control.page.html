@@ -1,9 +1,97 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>advanced-control</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="controls-container">
+    <div class="controls controls-side">
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="moveForwardLeft()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="caret-up"></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="stopLeft()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="stop"></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="moveBackwardLeft()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="caret-down"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="controls controls-middle">
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="moveForward()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="arrow-up"></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="stop()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="stop"></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="moveBackward()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="arrow-down"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="controls controls-side">
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="moveForwardRight()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="caret-up"></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="stopRight()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="stop"></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="(vehicleConnectionState | async) !== ConnectionState.Connected"
+        (click)="moveBackwardRight()"
+        fill="clear"
+        size="large"
+      >
+        <ion-icon name="caret-down"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div class="ion-no-padding">
+    <app-camera-view></app-camera-view>
+  </div>
+  <div class="ion-text-center">
+    <h3 class="ion-text-center">
+      Distance: {{distanceMeasurement | async}}
+    </h3>
+  </div>
 </ion-content>
+<ion-footer class="ion-no-border ion-margin-bottom">
+  <app-vehicle-connection-status
+    [connectionState]="vehicleConnectionState | async"
+    (connectToVehicle)="connectToVehicle()"
+  >
+  </app-vehicle-connection-status>
+</ion-footer>

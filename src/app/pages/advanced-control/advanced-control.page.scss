@@ -1,0 +1,20 @@
+.controls-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 5%;
+    justify-content: space-around;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.controls-side > ion-button {
+    margin: 0;
+}
+
+.controls-middle > ion-button {
+    margin: 15% auto;
+}
